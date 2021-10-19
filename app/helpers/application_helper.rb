@@ -2,9 +2,9 @@
 
 module ApplicationHelper
   def flash_message(message, klass)
-    content_tag(:div, class: "alert alert-#{klass}") do
-      concat content_tag(:button, 'x', class: 'close', data: { dismiss: 'alert' })
-      concat raw(message)
+    tag.div(class: "alert alert-#{klass}") do
+      concat tag.button('x', class: 'close', data: { dismiss: 'alert' })
+      concat message
     end
   end
 end
