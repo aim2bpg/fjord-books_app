@@ -30,9 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  books:
+    new:
+      header: New Book
+    edit:
+      header: Editing Book
   notice:
-    create: Book was successfully created.
-    update: Book was successfully updated.
-    destroy: Book was successfully destroyed.
+    create: "%{name} was successfully created."
+    update: "%{name} was successfully updated."
+    destroy: "%{name} was successfully destroyed."
   confirm:
     destroy: Are you sure?

@@ -1,7 +1,7 @@
 ja:
   activerecord:
     models:
-      book: 図書一覧  #g
+      book: 本  #g
 
     attributes:
       book:
@@ -9,9 +9,11 @@ ja:
         memo: 概要  #g
         picture: 写真  #g
         title: 題名  #g
-  headers:
-    new_book: 図書登録
-    editing_book: 図書編集
+  books:
+    new:
+      header: 図書登録
+    edit:
+      header: 図書編集
   links:
     edit: 編集
     back: 戻る
@@ -19,8 +21,8 @@ ja:
     index: 一覧
     destroy: 削除
   notice:
-    create: 図書の登録に成功しました
-    update: 図書の更新に成功しました
-    destroy: 図書の削除に成功しました
+    create: "%{name}の登録に成功しました"
+    update: "%{name}の更新に成功しました"
+    destroy: "%{name}の削除に成功しました"
   confirm:
     destroy: 削除してもよろしいですか？
