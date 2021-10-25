@@ -80,12 +80,5 @@ Rails.application.configure do
   }
 
   config.action_mailer.delivery_method = :letter_opener_web
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    authentication: :plain,
-    user_name: Rails.application.credentials.SMTP_EMAIL,
-    password: Rails.application.credentials.SMTP_PASSWORD
-  }
 
 end
