@@ -10,6 +10,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "layouts/header" %>
+    <div>
+      <% [[:success, :success], [:error, :danger], [:alert, :warning], [:notice, :info]]. each do |level, color| %>
+        <%= flash_message(flash[level], color) if flash[level] %>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
