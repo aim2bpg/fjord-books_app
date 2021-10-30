@@ -1,0 +1,36 @@
+<h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
+
+<p>
+  <% if User.find(@report.user_id).avatar.attached? %>
+    <%= image_tag User.find(@report.user_id).avatar.variant(resize_to_fill: [30, 30]) %>
+  <% end %>
+  <% if User.find(@report.user_id).name? %>
+    <%= User.find(@report.user_id).name %>
+  <% else %>
+    <%= User.find(@report.user_id).email %>
+  <% end %>
+</p>
+
+<p>
+  <strong><%= Report.human_attribute_name(:title) %>:</strong>
+  <%= @report.title %>
+</p>
+
+<p>
+  <strong><%= Report.human_attribute_name(:body) %>:</strong>
+  <%= @report.body %>
+</p>
+
+<p>
+  <strong><%= Report.human_attribute_name(:created_at) %>:</strong>
+  <%= l @report.created_at %>
+</p>
+
+<p>
+  <%= render 'comments/comments', commentable: @report, comment: @comments %>
+</p>
+
+<% if current_user == User.find(@report.user_id) %>
+  <%= link_to t('views.common.edit'), edit_report_path(@report) %> |
+<% end %>
+<%= link_to t('views.common.back'), reports_path %>
