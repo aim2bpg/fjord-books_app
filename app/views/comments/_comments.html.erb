@@ -1,0 +1,59 @@
+<h2><%= Comment.model_name.human %></h2>
+
+<% if commentable.comments.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th><%= User.human_attribute_name(:name) %>/<%= User.human_attribute_name(:email) %></th>
+        <th><%= Comment.human_attribute_name(:body) %></th>
+        <th><%= Comment.human_attribute_name(:created_at) %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% commentable.comments.each do |comment| %>
+        <tr>
+          <th>
+            <% if User.find(comment.user_id).avatar.attached? %>
+              <%= image_tag User.find(comment.user_id).avatar.variant(resize_to_fill: [30, 30]) %>
+            <% end %>
+          </th>
+          <td>
+            <% if User.find(comment.user_id).name? %>
+              <%= User.find(comment.user_id).name %>
+            <% else %>
+              <%= User.find(comment.user_id).email %>
+            <% end %>
+          </td>
+          <td><%= safe_join(comment.body.split("\n"), tag(:br)) %></td>
+          <td><%= l comment.created_at %></td>
+          <% if current_user == User.find(comment.user_id) %>
+            <td><%= link_to t('views.common.destroy'), comment, method: :delete, data: { confirm: t('views.common.delete_confirm') } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p><%= t('comments.index.notice') %></p>
+<% end %>
+
+<%= form_with model: [commentable, Comment.new], local: true do |f| %>  
+  <% if @comment.present? %>
+    <div id="error_explanation">
+      <h2><%= t 'errors.template.header', model: Comment.model_name.human, count: @comment.errors.count %></h2>
+      <ul>
+        <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <textarea name="comment[body]" required></textarea>
+  <div class="actions">  
+    <%= f.submit t('comments.index.create') %>  
+  </div>  
+<% end %>
