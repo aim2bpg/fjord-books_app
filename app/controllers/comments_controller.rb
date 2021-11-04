@@ -2,6 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show destroy]
+  before_action :check_user, only: %i[destroy]
 
   # GET /reports/1/comments
   # reportsと同じようにbooksをルーティングに追加すれば、
@@ -44,5 +45,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body).merge(user_id: current_user.id)
+  end
+
+  def check_user
+    redirect_back(fallback_location: root_path) if @comment.user_id != current_user.id
   end
 end

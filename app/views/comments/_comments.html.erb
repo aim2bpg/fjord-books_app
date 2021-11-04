@@ -27,7 +27,7 @@
               <%= User.find(comment.user_id).email %>
             <% end %>
           </td>
-          <td><%= comment.body %></td>
+          <td><%= safe_join(comment.body.split("\n"), tag(:br)) %></td>
           <td><%= l comment.created_at %></td>
           <% if current_user == User.find(comment.user_id) %>
             <td><%= link_to t('views.common.destroy'), comment, method: :delete, data: { confirm: t('views.common.delete_confirm') } %></td>

@@ -28,7 +28,7 @@
           <% end %>
         </td>
         <td><%= report.title %></td>
-        <td><%= report.body %></td>
+        <td><%= safe_join(report.body.split("\n"), tag(:br)) %></td>
         <td><%= l report.created_at %></td>
         <td><%= link_to t('views.common.show'), report %></td>
         <% if current_user == User.find(report.user_id) %>
