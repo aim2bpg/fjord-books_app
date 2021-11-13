@@ -4,7 +4,7 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
-    @report = reports(:alices_report)
+    @report = reports(:Alices_report)
 
     visit root_url
     fill_in 'Eメール', with: 'alice@example.com'
@@ -45,10 +45,15 @@ class ReportsTest < ApplicationSystemTestCase
 
   test 'destroying a Report' do
     visit reports_url
+    assert_text 'Alice'
+    assert_text 'Railsでテストを書く'
+
     page.accept_confirm do
       click_on '削除'
     end
 
     assert_text '日報が削除されました。'
+    assert_no_text 'Alice'
+    assert_no_text 'Railsでテストを書く'
   end
 end
