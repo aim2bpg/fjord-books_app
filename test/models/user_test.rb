@@ -4,7 +4,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   test '#following?' do
-    alice = users(:Alice)
+    alice = users(:alice)
     bob = users(:Bob)
 
     assert_not alice.following?(bob)
@@ -13,7 +13,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test '#followed_by?' do
-    alice = users(:Alice)
+    alice = users(:alice)
     bob = users(:Bob)
 
     assert_not bob.followed_by?(alice)
@@ -22,7 +22,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test '#follow' do
-    alice = users(:Alice)
+    alice = users(:alice)
     bob = users(:Bob)
 
     assert_not alice.following?(bob)
@@ -31,7 +31,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test '#unfollow' do
-    alice = users(:Alice)
+    alice = users(:alice)
     bob = users(:Bob)
 
     Relationship.create!(follower: alice, following: bob)
@@ -41,11 +41,11 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test '#name_or_email' do
-    alice = users(:Alice)
+    alice = users(:alice)
 
     alice.name = ''
     assert_equal 'alice@example.com', alice.name_or_email
-    alice.name = 'Alice'
-    assert_equal 'Alice', alice.name_or_email
+    alice.name = 'alice'
+    assert_equal 'alice', alice.name_or_email
   end
 end
